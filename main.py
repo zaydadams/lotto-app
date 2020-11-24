@@ -3,24 +3,20 @@ import random
 from tkinter import messagebox
 
 window = Tk()
-window.geometry('300x300')
+window.geometry('350x350')
 window.title('Login Form')
 
-name_ent = Entry(window)
-surname_ent= Entry(window)
+full_nm = Entry(window)
 age_ent = Entry(window)
 
-name_ent.place(x=90, y=50)
-surname_ent.place(x=90, y=100)
-age_ent.place(x=90, y=150)
+full_nm.place(x=90, y=50)
+age_ent.place(x=90, y=120)
 
-lbl_1 = Label(window, text='Name: ')
-lbl_2 = Label(window, text='Surname: ')
-lbl_3 = Label(window, text='Age: ')
+lbl_1 = Label(window, text='Full name: ')
+lbl_2 = Label(window, text='Age: ')
 
-lbl_1.place(x=20, y=55)
-lbl_2.place(x=20, y=105)
-lbl_3.place(x=20, y=155)
+lbl_1.place(x=10, y=55)
+lbl_2.place(x=10, y=125)
 
 
 def login():
@@ -30,7 +26,7 @@ def login():
         messagebox.showerror('Error', 'You must be over 18')
         window.withdraw()
     elif ages >=18:
-        messagebox.showinfo('Welcome', 'play responsibly ' + name_ent.get())
+        messagebox.showinfo('Welcome', 'Are you ready to be a Millionare ' + full_nm.get())
         window.withdraw()
         logged_in()
 
