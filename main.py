@@ -40,7 +40,6 @@ def logged_in():
     root = Tk()
     root.geometry('700x400')
     root.title('Lotto Ticket Generator')
-    import random
     lbl1 = Label(root, text='Lotto Generator', font=["Arial", 20])
     lbl1.pack()
 
@@ -74,28 +73,51 @@ def logged_in():
     label1.place(x = 100, y= 120)
 
     def generate():
-        r = sample(range(1, 49),6)
+        r = sample(range(1, 50), 6)
         r.sort()
 
         label1.configure(text=r)
 
-        counter= 0
+        counter = 0
 
         for number in user():
             if number in r:
                 counter += 1
-            messagebox.showinfo("attention")
 
-        elif:
+        if counter <= 1:
+            messagebox.showinfo("attention", "you a unlucky poes")
 
-            if number in r:
-                counter += 2
-            messagebox.showinfo("you only won a Rand")
+        elif counter <= 2:
+            messagebox.showinfo("attention", "you Won a R10 go buy you R10 mtn")
+
+        elif counter <= 3:
+            messagebox.showinfo("attention", "you Won Something")
+
+        elif counter <= 4:
+            messagebox.showinfo("attention", "you Won Something")
+
+        elif counter <= 5:
+            messagebox.showinfo("attention", "you Won Something")
+
+        elif counter <= 6:
+            messagebox.showinfo("attention", "you Won Something")
 
 
     btn = Button(root, text="generate", command=generate)
     btn.place(x=120, y=150)
 
+    def clear():
+        ent1.delete(0, END)
+        ent2.delete(0, END)
+        ent3.delete(0, END)
+        ent4.delete(0, END)
+        ent5.delete(0, END)
+        ent6.delete(0, END)
+        label1.delete(0, END)
+
+
+    btn2 =Button(root, text='clear', command=clear)
+    btn2.pack()
     root.mainloop()
 
 
