@@ -18,8 +18,8 @@ age_ent.place(x=90, y=120)
 lbl_1 = Label(window, text='Full name ', bg='black', fg='white')
 lbl_2 = Label(window, text='Age ', bg='black', fg='white')
 
-lbl_1.place(x=10, y=55)
-lbl_2.place(x=30, y=125)
+lbl_1.place(x=10, y=50)
+lbl_2.place(x=30, y=120)
 
 
 # functions for the first GUI
@@ -30,21 +30,33 @@ def login():
         messagebox.showerror('Error', 'You must be over 18')
         window.withdraw()
     elif ages >= 18:
-        messagebox.showinfo('Welcome Particapant', 'Are you ready to be a Millionare ' + full_nm.get())
+        messagebox.showinfo('Welcome Particapant', 'Are you ready to become a Millionare ' + full_nm.get())
         window.withdraw()
         logged_in()
 
 
+def clear():
+    full_nm.delete(0, END)
+    age_ent.delete(0, END)
+
+def exit():
+    window.destroy()
+
 btn1 = Button(window, text='Login', bg='black', fg='white', width='17', height='2', command=login)
 btn1.place(x=90, y=200)
 
+clear_btn = Button(window, text='clear', bg='black', fg='white', width='10', height='2', command=clear)
+clear_btn.place(x=180, y=280)
+
+ext_btn = Button(window, text='exit',bg='black', fg='white', width='10', height='2', command=exit)
+ext_btn.place(x=50, y=280)
 #second GUI
 def logged_in():
     root = Tk()
     root.geometry('700x400')
     root.title('Lotto Ticket Generator')
     root.config(bg='grey')
-    lbl1 = Label(root, text='Lotto Generator', font=["Arial", 20], bg='black', fg='white')
+    lbl1 = Label(root, text='Lotto App', font=["Arial", 20], bg='black', fg='white')
     lbl1.pack()
 
     ent1 = Entry(root, border='3', width='2')
@@ -78,13 +90,13 @@ def logged_in():
     label2= Label(root, text="Winning Numbers: ", bg='black', fg='white')
     label2.place(x=350, y=200)
 
-
+#function to get random numbers
     def generate():
         r = sample(range(1, 50), 6)
         r.sort()
 
         label1.configure(text=r)
-
+#text file containing lotto numbers
         a= open("lottery.txt","a+")
         txt = "The lucky numbers are: " +str(r)
         txt1 = "The Users entries: " +str(user())
@@ -94,6 +106,7 @@ def logged_in():
         data = "Name: "+full_nm.get() +"\n"+txt+"\n"+txt1+"\nDate: "+str(day)+"\nTime: "+str(time)+"\n="+"\n"
         a.write(data)
 
+#generate the numbers
         counter = 0
 
         for number in user():
@@ -118,11 +131,9 @@ def logged_in():
         elif counter == 6:
             messagebox.showinfo("", "You Won")
 
-
-
     btn = Button(root, text="generate", bg='black', fg='white', command=generate)
     btn.place(x=120, y=122)
-
+#clear button
     def clear():
         ent1.delete(0, END)
         ent2.delete(0, END)
@@ -130,7 +141,7 @@ def logged_in():
         ent4.delete(0, END)
         ent5.delete(0, END)
         ent6.delete(0, END)
-
+#exit button
     def exit():
         root.destroy()
 
@@ -139,10 +150,6 @@ def logged_in():
 
     btn2 =Button(root, text='clear', bg='black', fg='white', command=clear)
     btn2.place(x=100, y=200)
-
-    def generate():
-        text = open("lottery.txt","a+")
-        text.write("Lotto numbers"+str(generate()))
 
     root.mainloop()
 
